@@ -4,79 +4,232 @@
 
 Dating Bot построен на микросервисной архитектуре с использованием очередей сообщений для асинхронного взаимодействия между сервисами.
 
-## Компоненты системы
+## Схема архитектуры (Mermaid)
 
-### 1. Telegram Bot Service
-- Обрабатывает команды пользователей
-- Взаимодействует с Telegram Bot API
-- Отправляет уведомления пользователям
+```mermaid
+flowchart TB
+    subgraph External["Внешние системы"]
+        TG["Telegram API"]
+        S3["Minio S3"]
+    end
 
-### 2. API Service (FastAPI)
-- REST API для управления анкетами
-- Эндпоинты для системы рейтинга
-- Управление пользователями
+    subgraph Client["Клиент"]
+        BotClient["Telegram Bot"]
+    end
 
-### 3. Database Service (PostgreSQL)
-- Хранение данных пользователей
-- Хранение анкет
-- Хранение рейтингов
+    subgraph Gateway["API Gateway"]
+        Nginx["Nginx Load Balancer"]
+    end
 
-### 4. Cache Service (Redis)
-- Кэширование предварительно отранжированных списков анкет
-- Хранение сессий пользователей
-- Брокер сообщений для Celery
+    subgraph CoreServices["Основные сервисы"]
+        subgraph BotService["Bot Service"]
+            BotAPI["Bot API"]
+            BotHandler["Message Handler"]
+        end
+        
+        subgraph UserService["User Service"]
+            UserAPI["User API"]
+            UserRepo["User Repository"]
+        end
+        
+        subgraph ProfileService["Profile Service"]
+            ProfileAPI["Profile API"]
+            ProfileRepo["Profile Repository"]
+        end
+        
+        subgraph MatchService["Match Service"]
+            MatchAPI["Match API"]
+            MatchEngine["Match Engine"]
+        end
+        
+        subgraph ChatService["Chat Service"]
+            ChatAPI["Chat API"]
+            ChatRepo["Chat Repository"]
+        end
+        
+        subgraph RatingService["Rating Service"]
+            RatingAPI["Rating API"]
+            RatingEngine["Rating Engine"]
+        end
+    end
 
-### 5. Queue Service (RabbitMQ)
-- Потоковая обработка событий взаимодействия с анкетами
-- Общение между сервисами
-- Обработка мэтчей
+    subgraph MessageBroker["Message Broker (RabbitMQ)"]
+        Queue1["user.events"]
+        Queue2["match.events"]
+        Queue3["rating.events"]
+        Queue4["notification.events"]
+    end
 
-### 6. Task Service (Celery)
-- Регулярный пересчёт рейтингов
-- Асинхронная обработка задач
-- Отложенные операции
+    subgraph AsyncWorkers["Async Workers (Celery)"]
+        RatingWorker["Rating Worker"]
+        NotificationWorker["Notification Worker"]
+        CleanupWorker["Cleanup Worker"]
+    end
 
-### 7. Storage Service (Minio/S3)
-- Хранение фотографий пользователей
-- CDN для статических файлов
+    subgraph Cache["Cache Layer (Redis)"]
+        Redis1["Profile Cache"]
+        Redis2["Session Cache"]
+        Redis3["Rating Cache"]
+        Redis4["Queue Broker"]
+    end
 
-## Схема взаимодействия
+    subgraph Database["Database Layer (PostgreSQL)"]
+        PG1["tg_users"]
+        PG2["profiles"]
+        PG3["photos"]
+        PG4["likes"]
+        PG5["matches"]
+        PG6["chats"]
+        PG7["messages"]
+        PG8["ratings"]
+        PG9["referrals"]
+    end
 
-```
-Пользователь → Telegram Bot → API → PostgreSQL
-                              ↓
-                           RabbitMQ
-                              ↓
-                    Celery (async tasks)
-                              ↓
-                            Redis (cache)
+    %% Client to Bot
+    Client --> BotClient
+    BotClient <--> TG
+    
+    %% Bot to Gateway
+    BotClient --> Nginx
+    
+    %% Gateway to Services
+    Nginx --> BotAPI
+    Nginx --> UserAPI
+    Nginx --> ProfileAPI
+    Nginx --> MatchAPI
+    Nginx --> ChatAPI
+    Nginx --> RatingAPI
+    
+    %% Services to Database
+    UserRepo --> PG1
+    ProfileRepo --> PG2
+    ProfileRepo --> PG3
+    MatchEngine --> PG4
+    MatchEngine --> PG5
+    ChatRepo --> PG6
+    ChatRepo --> PG7
+    RatingEngine --> PG8
+    
+    %% Services to Cache
+    ProfileAPI --> Redis1
+    BotAPI --> Redis2
+    RatingAPI --> Redis3
+    Celery --> Redis4
+    
+    %% Services to Message Broker
+    BotHandler --> Queue1
+    MatchEngine --> Queue2
+    RatingEngine --> Queue3
+    ChatAPI --> Queue4
+    
+    %% Message Broker to Workers
+    Queue1 --> RatingWorker
+    Queue2 --> NotificationWorker
+    Queue3 --> RatingWorker
+    Queue4 --> NotificationWorker
+    
+    %% Workers to Services
+    RatingWorker --> RatingEngine
+    NotificationWorker --> BotHandler
+    
+    %% S3 Storage
+    ProfileAPI --> S3
 ```
 
 ## Потоки данных
 
-### Регистрация пользователя
-1. Пользователь отправляет /start в Telegram
-2. Bot Service получает команду
-3. Создаёт запись в PostgreSQL
-4. Отправляет приветственное сообщение
+```mermaid
+sequenceDiagram
+    participant User as Пользователь
+    participant Bot as Telegram
+    participant API as API Gateway
+    participant Service as Core Services
+    participant Cache as Redis
+    participant DB as PostgreSQL
+    participant MQ as RabbitMQ
+    participant Worker as Celery
 
-### Просмотр анкет
-1. Пользователь запрашивает анкету
-2. API проверяет Redis на наличие кэшированных анкет
-3. Если нет — генерирует новый список через сервис ранжирования
-4. Возвращает анкету пользователю
+    Note over User,Worker: Регистрация пользователя
+    User->>Bot: /start
+    Bot->>API: POST /users/register
+    API->>Service: Create User
+    Service->>DB: INSERT tg_users
+    DB-->>Service: User created
+    Service-->>Bot: Welcome message
+    Bot-->>User: Анкета создана
 
-### Лайк анкеты
-1. Пользователь ставит лайк
-2. Событие отправляется в RabbitMQ
-3. Celery обрабатывает событие:
-   - Обновляет поведенческий рейтинг
-   - Проверяет взаимный лайк
-   - Создаёт мэтч при совпадении
+    Note over User,Worker: Просмотр анкет
+    User->>Bot: Показать анкету
+    Bot->>API: GET /profiles/next
+    API->>Cache: Check cache
+    alt Cache hit
+        Cache-->>API: Profiles
+    else Cache miss
+        API->>Service: Get ranked profiles
+        Service->>DB: SELECT with ranking
+        DB-->>Service: Profiles
+        Service->>Cache: Store in cache
+        Cache-->>Service: Cached
+    end
+    API-->>Bot: Profile data
+    Bot-->>User: Показать анкету
+```
+
+## Компоненты системы
+
+### 1. Bot Service
+- Обработка команд Telegram
+- Интерфейс пользователя
+- Отправка уведомлений
+
+### 2. User Service
+- Управление пользователями
+- Регистрация и аутентификация
+
+### 3. Profile Service
+- CRUD операции с анкетами
+- Управление фотографиями
+- Интеграция с S3
+
+### 4. Match Service
+- Обработка лайков
+- Проверка взаимных лайков
+- Создание мэтчей
+
+### 5. Chat Service
+- Управление чатами
+- Отправка/получение сообщений
+
+### 6. Rating Service
+- Расчёт рейтингов (3 уровня)
+- Ранжирование анкет
+- Обновление через Celery
+
+## Технологический стек
+
+| Компонент | Технология | Назначение |
+|-----------|------------|------------|
+| Backend | Python FastAPI | REST API |
+| Bot | python-telegram-bot | Telegram интеграция |
+| Database | PostgreSQL | Основное хранилище |
+| Cache | Redis | Кэширование, сессии |
+| Queue | RabbitMQ | Асинхронные сообщения |
+| Tasks | Celery | Фоновые задачи |
+| Storage | Minio | S3 для фото |
+| Nginx | Reverse Proxy | Балансировка |
+
+## Взаимодействие сервисов
+
+### Синхронное (REST)
+- Client → API Gateway → Core Services → Database
+
+### Асинхронное (MQ)
+- Services → RabbitMQ → Celery Workers
+- Workers → Services → Database
 
 ## Масштабирование
 
-- **Горизонтальное**: несколько инстансов API и Bot Service
+- **Горизонтальное**: несколько инстансов каждого сервиса
 - **Вертикальное**: увеличение ресурсов PostgreSQL и Redis
 - **Кэширование**: Redis для снижения нагрузки на БД
 - **Очереди**: RabbitMQ для асинхронной обработки
