@@ -1,12 +1,10 @@
 import uuid
 
 import pytest
-import pytest_asyncio
 
 from app.services import user_service, profile_service
 
 
-@pytest.mark.asyncio
 async def test_register_user(db_session):
     user = await user_service.register_user(
         db_session,
@@ -22,7 +20,6 @@ async def test_register_user(db_session):
     assert user.first_name == "Test"
 
 
-@pytest.mark.asyncio
 async def test_register_user_idempotent(db_session):
     user1 = await user_service.register_user(
         db_session,
@@ -42,7 +39,6 @@ async def test_register_user_idempotent(db_session):
     assert user1.id == user2.id
 
 
-@pytest.mark.asyncio
 async def test_create_profile(db_session):
     user = await user_service.register_user(
         db_session,
@@ -69,7 +65,6 @@ async def test_create_profile(db_session):
     assert profile.city == "Moscow"
 
 
-@pytest.mark.asyncio
 async def test_create_profile_user_not_found(db_session):
     with pytest.raises(ValueError, match="User not found"):
         await profile_service.create_profile(
@@ -82,7 +77,6 @@ async def test_create_profile_user_not_found(db_session):
         )
 
 
-@pytest.mark.asyncio
 async def test_api_register_user(client):
     response = await client.post(
         "/api/v1/users/register",
@@ -99,7 +93,6 @@ async def test_api_register_user(client):
     assert data["first_name"] == "API"
 
 
-@pytest.mark.asyncio
 async def test_api_create_profile(client):
     reg_response = await client.post(
         "/api/v1/users/register",
@@ -126,7 +119,6 @@ async def test_api_create_profile(client):
     assert data["city"] == "Saint Petersburg"
 
 
-@pytest.mark.asyncio
 async def test_api_get_user_not_found(client):
     response = await client.get(f"/api/v1/users/{uuid.uuid4()}")
     assert response.status_code == 404

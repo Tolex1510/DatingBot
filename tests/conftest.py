@@ -1,8 +1,6 @@
-import asyncio
 import uuid
 from collections.abc import AsyncGenerator
 
-import pytest
 import pytest_asyncio
 from httpx import ASGITransport, AsyncClient
 from sqlalchemy.ext.asyncio import (
@@ -14,30 +12,22 @@ from sqlalchemy.ext.asyncio import (
 from app.config import settings
 from app.db import session as session_module
 from app.models.base import Base
-from app.models.user import TgUser  # noqa: F401
-from app.models.profile import Profile  # noqa: F401
-from app.models.photo import Photo  # noqa: F401
+from app.models import TgUser, Profile, Photo, Like, Match, Rating, Referral, Chat, Message  # noqa: F401
 
 
 TEST_DB_URL = settings.database_url
 
 
-@pytest.fixture(scope="session")
-def event_loop():
-    loop = asyncio.new_event_loop()
-    yield loop
-    loop.close()
-
-
-@pytest_asyncio.fixture(scope="session")
+@pytest_asyncio.fixture
 async def engine():
-    engine = create_async_engine(TEST_DB_URL, echo=False)
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
-    yield engine
-    async with engine.begin() as conn:
+    eng = create_async_engine(TEST_DB_URL, echo=False)
+    async with eng.begin() as conn:
         await conn.run_sync(Base.metadata.drop_all)
-    await engine.dispose()
+        await conn.run_sync(Base.metadata.create_all)
+    yield eng
+    async with eng.begin() as conn:
+        await conn.run_sync(Base.metadata.drop_all)
+    await eng.dispose()
 
 
 @pytest_asyncio.fixture
@@ -56,5 +46,5 @@ async def client(engine) -> AsyncGenerator[AsyncClient, None]:
     from app.main import app
 
     transport = ASGITransport(app=app)
-    async with AsyncClient(transport=transport, base_url="http://test") as client:
-        yield client
+    async with AsyncClient(transport=transport, base_url="http://test") as ac:
+        yield ac
