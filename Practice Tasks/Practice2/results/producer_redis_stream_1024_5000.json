@@ -1,0 +1,1 @@
+{"run_id": "redis_stream_1024_5000", "broker": "redis_stream", "msg_size": 1024, "target_rate": 5000, "duration": 15, "sent": 18996, "errors": 0, "max_seq": 18995}

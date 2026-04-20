@@ -1,0 +1,86 @@
+
+=== rabbitmq_128_1000 ===
+[producer] {'run_id': 'rabbitmq_128_1000', 'broker': 'rabbitmq', 'msg_size': 128, 'target_rate': 1000, 'duration': 30, 'sent': 28900, 'errors': 0, 'max_seq': 28899}
+[consumer] {'run_id': 'rabbitmq_128_1000', 'broker': 'rabbitmq', 'msg_size': 128, 'target_rate': 1000, 'duration': 30, 'received': 28900, 'lost': 0, 'avg_ms': 26.679, 'p50_ms': 13.849, 'p95_ms': 80.051, 'p99_ms': 313.235, 'max_ms': 368.381}
+[row] {'broker': 'rabbitmq', 'msg_size': 128, 'target_rate': 1000, 'duration': 30, 'sent': 28900, 'received': 28900, 'lost': 0, 'received_per_sec': 963.3, 'avg_ms': 26.679, 'p50_ms': 13.849, 'p95_ms': 80.051, 'p99_ms': 313.235, 'max_ms': 368.381, 'producer_errors': 0}
+
+=== rabbitmq_128_5000 ===
+[producer] {'run_id': 'rabbitmq_128_5000', 'broker': 'rabbitmq', 'msg_size': 128, 'target_rate': 5000, 'duration': 30, 'sent': 59424, 'errors': 0, 'max_seq': 59423}
+[consumer] {'run_id': 'rabbitmq_128_5000', 'broker': 'rabbitmq', 'msg_size': 128, 'target_rate': 5000, 'duration': 30, 'received': 59424, 'lost': 0, 'avg_ms': 3800.015, 'p50_ms': 3890.204, 'p95_ms': 6860.7, 'p99_ms': 6878.603, 'max_ms': 6893.783}
+[row] {'broker': 'rabbitmq', 'msg_size': 128, 'target_rate': 5000, 'duration': 30, 'sent': 59424, 'received': 59424, 'lost': 0, 'received_per_sec': 1980.8, 'avg_ms': 3800.015, 'p50_ms': 3890.204, 'p95_ms': 6860.7, 'p99_ms': 6878.603, 'max_ms': 6893.783, 'producer_errors': 0}
+
+=== rabbitmq_128_10000 ===
+[producer] {'run_id': 'rabbitmq_128_10000', 'broker': 'rabbitmq', 'msg_size': 128, 'target_rate': 10000, 'duration': 30, 'sent': 59104, 'errors': 0, 'max_seq': 59103}
+[consumer] {'run_id': 'rabbitmq_128_10000', 'broker': 'rabbitmq', 'msg_size': 128, 'target_rate': 10000, 'duration': 30, 'received': 59104, 'lost': 0, 'avg_ms': 3515.084, 'p50_ms': 4263.908, 'p95_ms': 5559.724, 'p99_ms': 5727.933, 'max_ms': 5802.588}
+[row] {'broker': 'rabbitmq', 'msg_size': 128, 'target_rate': 10000, 'duration': 30, 'sent': 59104, 'received': 59104, 'lost': 0, 'received_per_sec': 1970.1, 'avg_ms': 3515.084, 'p50_ms': 4263.908, 'p95_ms': 5559.724, 'p99_ms': 5727.933, 'max_ms': 5802.588, 'producer_errors': 0}
+
+=== rabbitmq_1024_1000 ===
+[producer] {'run_id': 'rabbitmq_1024_1000', 'broker': 'rabbitmq', 'msg_size': 1024, 'target_rate': 1000, 'duration': 30, 'sent': 28680, 'errors': 0, 'max_seq': 28679}
+[consumer] {'run_id': 'rabbitmq_1024_1000', 'broker': 'rabbitmq', 'msg_size': 1024, 'target_rate': 1000, 'duration': 30, 'received': 28680, 'lost': 0, 'avg_ms': 26.258, 'p50_ms': 14.389, 'p95_ms': 84.614, 'p99_ms': 287.447, 'max_ms': 447.136}
+[row] {'broker': 'rabbitmq', 'msg_size': 1024, 'target_rate': 1000, 'duration': 30, 'sent': 28680, 'received': 28680, 'lost': 0, 'received_per_sec': 956.0, 'avg_ms': 26.258, 'p50_ms': 14.389, 'p95_ms': 84.614, 'p99_ms': 287.447, 'max_ms': 447.136, 'producer_errors': 0}
+
+=== rabbitmq_1024_5000 ===
+[producer] {'run_id': 'rabbitmq_1024_5000', 'broker': 'rabbitmq', 'msg_size': 1024, 'target_rate': 5000, 'duration': 30, 'sent': 45373, 'errors': 0, 'max_seq': 45372}
+[consumer] {'run_id': 'rabbitmq_1024_5000', 'broker': 'rabbitmq', 'msg_size': 1024, 'target_rate': 5000, 'duration': 30, 'received': 45373, 'lost': 0, 'avg_ms': 4180.614, 'p50_ms': 5109.651, 'p95_ms': 7207.394, 'p99_ms': 7281.981, 'max_ms': 7320.268}
+[row] {'broker': 'rabbitmq', 'msg_size': 1024, 'target_rate': 5000, 'duration': 30, 'sent': 45373, 'received': 45373, 'lost': 0, 'received_per_sec': 1512.4, 'avg_ms': 4180.614, 'p50_ms': 5109.651, 'p95_ms': 7207.394, 'p99_ms': 7281.981, 'max_ms': 7320.268, 'producer_errors': 0}
+
+=== rabbitmq_1024_10000 ===
+[producer] {'run_id': 'rabbitmq_1024_10000', 'broker': 'rabbitmq', 'msg_size': 1024, 'target_rate': 10000, 'duration': 30, 'sent': 39111, 'errors': 0, 'max_seq': 39110}
+[consumer] {'run_id': 'rabbitmq_1024_10000', 'broker': 'rabbitmq', 'msg_size': 1024, 'target_rate': 10000, 'duration': 30, 'received': 39111, 'lost': 0, 'avg_ms': 2511.303, 'p50_ms': 2371.225, 'p95_ms': 4374.623, 'p99_ms': 4677.653, 'max_ms': 4717.872}
+[row] {'broker': 'rabbitmq', 'msg_size': 1024, 'target_rate': 10000, 'duration': 30, 'sent': 39111, 'received': 39111, 'lost': 0, 'received_per_sec': 1303.7, 'avg_ms': 2511.303, 'p50_ms': 2371.225, 'p95_ms': 4374.623, 'p99_ms': 4677.653, 'max_ms': 4717.872, 'producer_errors': 0}
+
+=== rabbitmq_10240_1000 ===
+[producer] {'run_id': 'rabbitmq_10240_1000', 'broker': 'rabbitmq', 'msg_size': 10240, 'target_rate': 1000, 'duration': 30, 'sent': 29517, 'errors': 0, 'max_seq': 29516}
+[consumer] {'run_id': 'rabbitmq_10240_1000', 'broker': 'rabbitmq', 'msg_size': 10240, 'target_rate': 1000, 'duration': 30, 'received': 29517, 'lost': 0, 'avg_ms': 15.307, 'p50_ms': 11.956, 'p95_ms': 38.576, 'p99_ms': 68.969, 'max_ms': 118.966}
+[row] {'broker': 'rabbitmq', 'msg_size': 10240, 'target_rate': 1000, 'duration': 30, 'sent': 29517, 'received': 29517, 'lost': 0, 'received_per_sec': 983.9, 'avg_ms': 15.307, 'p50_ms': 11.956, 'p95_ms': 38.576, 'p99_ms': 68.969, 'max_ms': 118.966, 'producer_errors': 0}
+
+=== rabbitmq_10240_5000 ===
+
+=== redis_stream_128_1000 ===
+
+=== redis_stream_128_1000 ===
+[producer] {'run_id': 'redis_stream_128_1000', 'broker': 'redis_stream', 'msg_size': 128, 'target_rate': 1000, 'duration': 15, 'sent': 14672, 'errors': 0, 'max_seq': 14671}
+[consumer] {'run_id': 'redis_stream_128_1000', 'broker': 'redis_stream', 'msg_size': 128, 'target_rate': 1000, 'duration': 15, 'received': 14672, 'lost': 0, 'avg_ms': 1.518, 'p50_ms': 1.315, 'p95_ms': 3.069, 'p99_ms': 4.672, 'max_ms': 14.87}
+[row] {'broker': 'redis_stream', 'msg_size': 128, 'target_rate': 1000, 'duration': 15, 'sent': 14672, 'received': 14672, 'lost': 0, 'received_per_sec': 978.1, 'avg_ms': 1.518, 'p50_ms': 1.315, 'p95_ms': 3.069, 'p99_ms': 4.672, 'max_ms': 14.87, 'producer_errors': 0}
+
+=== redis_stream_128_5000 ===
+[producer] {'run_id': 'redis_stream_128_5000', 'broker': 'redis_stream', 'msg_size': 128, 'target_rate': 5000, 'duration': 15, 'sent': 30591, 'errors': 0, 'max_seq': 30590}
+[consumer] {'run_id': 'redis_stream_128_5000', 'broker': 'redis_stream', 'msg_size': 128, 'target_rate': 5000, 'duration': 15, 'received': 30591, 'lost': 0, 'avg_ms': 1.147, 'p50_ms': 0.98, 'p95_ms': 2.051, 'p99_ms': 3.65, 'max_ms': 49.528}
+[row] {'broker': 'redis_stream', 'msg_size': 128, 'target_rate': 5000, 'duration': 15, 'sent': 30591, 'received': 30591, 'lost': 0, 'received_per_sec': 2039.4, 'avg_ms': 1.147, 'p50_ms': 0.98, 'p95_ms': 2.051, 'p99_ms': 3.65, 'max_ms': 49.528, 'producer_errors': 0}
+
+=== redis_stream_128_10000 ===
+[producer] {'run_id': 'redis_stream_128_10000', 'broker': 'redis_stream', 'msg_size': 128, 'target_rate': 10000, 'duration': 15, 'sent': 26105, 'errors': 0, 'max_seq': 26104}
+[consumer] {'run_id': 'redis_stream_128_10000', 'broker': 'redis_stream', 'msg_size': 128, 'target_rate': 10000, 'duration': 15, 'received': 26105, 'lost': 0, 'avg_ms': 1.357, 'p50_ms': 1.065, 'p95_ms': 2.89, 'p99_ms': 6.273, 'max_ms': 29.712}
+[row] {'broker': 'redis_stream', 'msg_size': 128, 'target_rate': 10000, 'duration': 15, 'sent': 26105, 'received': 26105, 'lost': 0, 'received_per_sec': 1740.3, 'avg_ms': 1.357, 'p50_ms': 1.065, 'p95_ms': 2.89, 'p99_ms': 6.273, 'max_ms': 29.712, 'producer_errors': 0}
+
+=== redis_stream_1024_1000 ===
+[producer] {'run_id': 'redis_stream_1024_1000', 'broker': 'redis_stream', 'msg_size': 1024, 'target_rate': 1000, 'duration': 15, 'sent': 14188, 'errors': 0, 'max_seq': 14187}
+[consumer] {'run_id': 'redis_stream_1024_1000', 'broker': 'redis_stream', 'msg_size': 1024, 'target_rate': 1000, 'duration': 15, 'received': 14188, 'lost': 0, 'avg_ms': 1.832, 'p50_ms': 1.448, 'p95_ms': 3.822, 'p99_ms': 7.404, 'max_ms': 33.198}
+[row] {'broker': 'redis_stream', 'msg_size': 1024, 'target_rate': 1000, 'duration': 15, 'sent': 14188, 'received': 14188, 'lost': 0, 'received_per_sec': 945.9, 'avg_ms': 1.832, 'p50_ms': 1.448, 'p95_ms': 3.822, 'p99_ms': 7.404, 'max_ms': 33.198, 'producer_errors': 0}
+
+=== redis_stream_1024_5000 ===
+[producer] {'run_id': 'redis_stream_1024_5000', 'broker': 'redis_stream', 'msg_size': 1024, 'target_rate': 5000, 'duration': 15, 'sent': 18996, 'errors': 0, 'max_seq': 18995}
+[consumer] {'run_id': 'redis_stream_1024_5000', 'broker': 'redis_stream', 'msg_size': 1024, 'target_rate': 5000, 'duration': 15, 'received': 18996, 'lost': 0, 'avg_ms': 1.824, 'p50_ms': 1.47, 'p95_ms': 3.985, 'p99_ms': 6.766, 'max_ms': 29.872}
+[row] {'broker': 'redis_stream', 'msg_size': 1024, 'target_rate': 5000, 'duration': 15, 'sent': 18996, 'received': 18996, 'lost': 0, 'received_per_sec': 1266.4, 'avg_ms': 1.824, 'p50_ms': 1.47, 'p95_ms': 3.985, 'p99_ms': 6.766, 'max_ms': 29.872, 'producer_errors': 0}
+
+=== redis_stream_1024_10000 ===
+[producer] {'run_id': 'redis_stream_1024_10000', 'broker': 'redis_stream', 'msg_size': 1024, 'target_rate': 10000, 'duration': 15, 'sent': 22806, 'errors': 0, 'max_seq': 22805}
+[consumer] {'run_id': 'redis_stream_1024_10000', 'broker': 'redis_stream', 'msg_size': 1024, 'target_rate': 10000, 'duration': 15, 'received': 22806, 'lost': 0, 'avg_ms': 1.719, 'p50_ms': 1.187, 'p95_ms': 3.479, 'p99_ms': 10.713, 'max_ms': 75.884}
+[row] {'broker': 'redis_stream', 'msg_size': 1024, 'target_rate': 10000, 'duration': 15, 'sent': 22806, 'received': 22806, 'lost': 0, 'received_per_sec': 1520.4, 'avg_ms': 1.719, 'p50_ms': 1.187, 'p95_ms': 3.479, 'p99_ms': 10.713, 'max_ms': 75.884, 'producer_errors': 0}
+
+=== redis_stream_10240_1000 ===
+[producer] {'run_id': 'redis_stream_10240_1000', 'broker': 'redis_stream', 'msg_size': 10240, 'target_rate': 1000, 'duration': 15, 'sent': 14513, 'errors': 0, 'max_seq': 14512}
+[consumer] {'run_id': 'redis_stream_10240_1000', 'broker': 'redis_stream', 'msg_size': 10240, 'target_rate': 1000, 'duration': 15, 'received': 14513, 'lost': 0, 'avg_ms': 1.712, 'p50_ms': 1.475, 'p95_ms': 3.42, 'p99_ms': 5.097, 'max_ms': 19.716}
+[row] {'broker': 'redis_stream', 'msg_size': 10240, 'target_rate': 1000, 'duration': 15, 'sent': 14513, 'received': 14513, 'lost': 0, 'received_per_sec': 967.5, 'avg_ms': 1.712, 'p50_ms': 1.475, 'p95_ms': 3.42, 'p99_ms': 5.097, 'max_ms': 19.716, 'producer_errors': 0}
+
+=== redis_stream_10240_5000 ===
+[producer] {'run_id': 'redis_stream_10240_5000', 'broker': 'redis_stream', 'msg_size': 10240, 'target_rate': 5000, 'duration': 15, 'sent': 23395, 'errors': 0, 'max_seq': 23394}
+[consumer] {'run_id': 'redis_stream_10240_5000', 'broker': 'redis_stream', 'msg_size': 10240, 'target_rate': 5000, 'duration': 15, 'received': 23395, 'lost': 0, 'avg_ms': 1.464, 'p50_ms': 1.255, 'p95_ms': 2.72, 'p99_ms': 4.877, 'max_ms': 24.861}
+[row] {'broker': 'redis_stream', 'msg_size': 10240, 'target_rate': 5000, 'duration': 15, 'sent': 23395, 'received': 23395, 'lost': 0, 'received_per_sec': 1559.7, 'avg_ms': 1.464, 'p50_ms': 1.255, 'p95_ms': 2.72, 'p99_ms': 4.877, 'max_ms': 24.861, 'producer_errors': 0}
+
+=== redis_stream_10240_10000 ===
+[producer] {'run_id': 'redis_stream_10240_10000', 'broker': 'redis_stream', 'msg_size': 10240, 'target_rate': 10000, 'duration': 15, 'sent': 25670, 'errors': 0, 'max_seq': 25669}
+[consumer] {'run_id': 'redis_stream_10240_10000', 'broker': 'redis_stream', 'msg_size': 10240, 'target_rate': 10000, 'duration': 15, 'received': 25670, 'lost': 0, 'avg_ms': 1.285, 'p50_ms': 1.189, 'p95_ms': 2.239, 'p99_ms': 3.385, 'max_ms': 11.581}
+[row] {'broker': 'redis_stream', 'msg_size': 10240, 'target_rate': 10000, 'duration': 15, 'sent': 25670, 'received': 25670, 'lost': 0, 'received_per_sec': 1711.3, 'avg_ms': 1.285, 'p50_ms': 1.189, 'p95_ms': 2.239, 'p99_ms': 3.385, 'max_ms': 11.581, 'producer_errors': 0}
+
+Done. CSV: /home/tolex/Programming/Technology/DatingBot/Practice Tasks/Practice2/results/raw.csv

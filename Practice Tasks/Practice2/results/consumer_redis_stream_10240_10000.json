@@ -1,0 +1,1 @@
+{"run_id": "redis_stream_10240_10000", "broker": "redis_stream", "msg_size": 10240, "target_rate": 10000, "duration": 15, "received": 25670, "lost": 0, "avg_ms": 1.285, "p50_ms": 1.189, "p95_ms": 2.239, "p99_ms": 3.385, "max_ms": 11.581}

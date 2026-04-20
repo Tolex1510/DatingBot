@@ -1,0 +1,1 @@
+{"run_id": "rabbitmq_128_1000", "broker": "rabbitmq", "msg_size": 128, "target_rate": 1000, "duration": 30, "received": 28900, "lost": 0, "avg_ms": 26.679, "p50_ms": 13.849, "p95_ms": 80.051, "p99_ms": 313.235, "max_ms": 368.381}

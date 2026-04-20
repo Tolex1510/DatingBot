@@ -1,0 +1,1 @@
+{"run_id": "rabbitmq_128_10000", "broker": "rabbitmq", "msg_size": 128, "target_rate": 10000, "duration": 30, "sent": 59104, "errors": 0, "max_seq": 59103}
