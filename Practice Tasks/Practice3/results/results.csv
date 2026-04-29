@@ -1,0 +1,10 @@
+strategy,scenario,throughput,avg_latency_ms,db_hits,cache_hit_rate,total_ops,dirty_keys_at_end
+cache_aside,read_heavy,1921.45,10.393,21351,0.7849,57657,0
+cache_aside,balanced,1490.61,13.402,33853,0.4857,44727,0
+cache_aside,write_heavy,1233.85,16.194,35594,0.194,37022,0
+write_through,read_heavy,3854.37,5.18,23866,0.9912,115649,0
+write_through,balanced,2031.7,9.83,30982,0.983,60964,0
+write_through,write_heavy,2065.12,9.674,49868,0.9825,61961,0
+write_back,read_heavy,5751.16,3.472,2950,0.9941,172542,949
+write_back,balanced,4536.73,4.402,2663,0.9923,136111,972
+write_back,write_heavy,4050.11,4.932,2389,0.9924,121511,977
